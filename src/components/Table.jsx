@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../hooks/PlanetsContext';
 
 const Table = () => {
-  const { dataPlanets, titles } = useContext(PlanetsContext);
+  const { dataPlanets, titles, filteredPlanets } = useContext(PlanetsContext);
 
   return (
     <div>
@@ -16,13 +16,21 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {dataPlanets && dataPlanets.map((planets, i) => (
+          {filteredPlanets ? filteredPlanets.map((planetsF, i) => (
             <tr key={ i }>
               {titles && titles.map((key) => (
-                <td key={ `${i}${key}` }>{planets[key]}</td>
+                <td key={ `${i}${key}` }>{planetsF[key]}</td>
               ))}
             </tr>
-          ))}
+          )) : (
+            dataPlanets && dataPlanets.map((planets, i) => (
+              <tr key={ i }>
+                {titles && titles.map((key) => (
+                  <td key={ `${i}${key}` }>{planets[key]}</td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
