@@ -2,6 +2,13 @@ import React, { useContext, useState } from 'react';
 import PlanetsContext from '../hooks/PlanetsContext';
 
 export default function Filters() {
+  const {
+    filterByName,
+    filterPlanetsByName,
+    filterPlanetsByNumber,
+    columnKeys,
+  } = useContext(PlanetsContext);
+
   const [filterByNumericValues, setFilterByNumericValues] = useState({
     column: 'population',
     comparison: 'maior que',
@@ -15,11 +22,7 @@ export default function Filters() {
       [name]: value,
     });
   };
-  const {
-    filterByName,
-    filterPlanetsByName,
-    filterPlanetsByNumber,
-  } = useContext(PlanetsContext);
+
   return (
     <>
       <div>
@@ -38,11 +41,9 @@ export default function Filters() {
           value={ filterByNumericValues.column }
           onChange={ handleChange }
         >
-          <option value="population" onClick={ handleChange }>population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {columnKeys.map((key, i) => (
+            <option key={ i } value={ key }>{ key }</option>
+          ))}
         </select>
         <select
           name="comparison"

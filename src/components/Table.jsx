@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../hooks/PlanetsContext';
 
 const Table = () => {
-  const { dataPlanets, titles, filteredPlanets } = useContext(PlanetsContext);
+  const {
+    dataPlanets,
+    titles,
+    filteredPlanets,
+  } = useContext(PlanetsContext);
 
   return (
     <div>

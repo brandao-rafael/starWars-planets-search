@@ -10,6 +10,14 @@ const PlanetsProvider = ({ children }) => {
     name: '',
   });
   const [filteredPlanets, setFilteredPlanets] = useState();
+  const [columnKeys, setColumnKeys] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
+  const [filters, setFilters] = useState([]);
 
   const filterPlanetsByName = ({ target: { value } }) => {
     setFilterByName({ name: value });
@@ -23,17 +31,31 @@ const PlanetsProvider = ({ children }) => {
     column = 'population',
     value = 0,
   }) => {
+    const i = 0;
+    filters.forEach((filter) => {
+      if (filter.column.includes(column)) column = columnKeys[i];
+    });
     if (comparison === 'maior que') {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) > value));
     } else if (comparison === 'menor que') {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) < value));
+      console.log(column);
     } else {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => planets[column] === value));
-      console.log('equal');
     }
+    setColumnKeys(columnKeys.filter((key) => key !== column));
+    setFilters([
+      ...filters,
+      {
+        column,
+        comparison,
+        value,
+      }]);
+    console.log(filters);
+    // criar state com filtro
   };
 
   useEffect(() => {
@@ -59,6 +81,7 @@ const PlanetsProvider = ({ children }) => {
     filterByName,
     filteredPlanets,
     filterPlanetsByNumber,
+    columnKeys,
   };
 
   return (
