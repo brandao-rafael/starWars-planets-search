@@ -24,13 +24,13 @@ const PlanetsProvider = ({ children }) => {
     value = 0,
   }) => {
     if (comparison === 'maior que') {
-      setFilteredPlanets(dataPlanets
+      setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) > value));
     } else if (comparison === 'menor que') {
-      setFilteredPlanets(dataPlanets
+      setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) < value));
     } else {
-      setFilteredPlanets(dataPlanets
+      setFilteredPlanets(filteredPlanets
         .filter((planets) => planets[column] === value));
       console.log('equal');
     }
@@ -47,6 +47,7 @@ const PlanetsProvider = ({ children }) => {
       setDataPlanets(dataFormatted);
       const title = await Object.keys(dataFormatted[0]);
       setTitle(title);
+      setFilteredPlanets(dataFormatted);
     };
     getData();
   }, []);
