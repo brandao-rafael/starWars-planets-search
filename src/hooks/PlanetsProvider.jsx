@@ -18,6 +18,24 @@ const PlanetsProvider = ({ children }) => {
         .toLowerCase().includes(value.toLowerCase())));
   };
 
+  const filterPlanetsByNumber = ({
+    comparison = 'maior que',
+    column = 'population',
+    value = 0,
+  }) => {
+    if (comparison === 'maior que') {
+      setFilteredPlanets(dataPlanets
+        .filter((planets) => Number(planets[column]) > value));
+    } else if (comparison === 'menor que') {
+      setFilteredPlanets(dataPlanets
+        .filter((planets) => Number(planets[column]) < value));
+    } else {
+      setFilteredPlanets(dataPlanets
+        .filter((planets) => planets[column] === value));
+      console.log('equal');
+    }
+  };
+
   useEffect(() => {
     const getData = async () => {
       const dataUnformatted = await planetApi();
@@ -39,6 +57,7 @@ const PlanetsProvider = ({ children }) => {
     filterPlanetsByName,
     filterByName,
     filteredPlanets,
+    filterPlanetsByNumber,
   };
 
   return (
