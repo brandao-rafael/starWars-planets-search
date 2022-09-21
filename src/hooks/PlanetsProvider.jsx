@@ -41,7 +41,6 @@ const PlanetsProvider = ({ children }) => {
     } else if (comparison === 'menor que') {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) < value));
-      console.log(column);
     } else {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => planets[column] === value));
@@ -54,7 +53,6 @@ const PlanetsProvider = ({ children }) => {
         comparison,
         value,
       }]);
-    console.log(filters);
     // criar state com filtro
   };
 
@@ -82,6 +80,10 @@ const PlanetsProvider = ({ children }) => {
     filteredPlanets,
     filterPlanetsByNumber,
     columnKeys,
+    setColumnKeys,
+    filters,
+    setFilters,
+    setFilteredPlanets,
   };
 
   return (
