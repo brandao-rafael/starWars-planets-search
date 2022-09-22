@@ -178,7 +178,7 @@ describe('test the page', () => {
     waitFor(() => expect(screen.getAllByTestId('planet-name')).toHaveLength(1))
   });
 
-  it('if is possible filter just click on the button', async () => {
+  it('if is possible filter just click on the button and comparison', async () => {
     global.fetch = jest.fn(async () => ({
       json: async () => mockData,
     }))
@@ -199,11 +199,14 @@ describe('test the page', () => {
     waitFor(() => expect(screen.getAllByTestId('planet-name')).toHaveLength(6))
     const buttonsRemove = screen.getAllByRole('button', { name: /remove/i });
     expect(buttonsRemove).toHaveLength(6);
-    userEvent.click(buttonsRemove[4]);
-    waitFor(() => expect(screen.getAllByTestId('planet-name')).toHaveLength(10))
   });
 
-  it('if is possible order before filter', async () => {
+});
+
+describe('test de behavior of the page', () => {
+    afterEach(cleanup);
+    beforeEach(cleanup);
+    it('if is possible order before filter', async () => {
     global.fetch = jest.fn(async () => ({
       json: async () => mockData,
     }))
@@ -239,24 +242,7 @@ describe('test the page', () => {
     const removeButton = screen.getByRole('button', { name: 'remove' });
     userEvent.click(removeButton);
     await expect(screen.getAllByTestId('planet-name')).toHaveLength(10);
-
-    userEvent.selectOptions(columnFilter, 'rotation_period')
-    userEvent.selectOptions(comparisonFilter, 'igual a');
-    userEvent.clear(valueFilter);
-    userEvent.type(valueFilter, '23');
-    userEvent.click(buttonFilter);
-
-    await expect(screen.getAllByTestId('planet-name')).toHaveLength(3);
-
-    userEvent.selectOptions(columnFilter, 'diameter')
-    userEvent.selectOptions(comparisonFilter, 'menor que');
-    userEvent.clear(valueFilter);
-    userEvent.type(valueFilter, '10000');
-    userEvent.click(buttonFilter);
-
-    await expect(screen.getAllByTestId('planet-name')).toHaveLength(2);
   });
-
-})
+});
 
 
