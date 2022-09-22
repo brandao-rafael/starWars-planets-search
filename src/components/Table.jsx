@@ -22,8 +22,13 @@ const Table = () => {
         <tbody>
           {filteredPlanets ? filteredPlanets.map((planetsF, i) => (
             <tr key={ i }>
-              {titles && titles.map((key) => (
-                <td key={ `${i}${key}` }>{planetsF[key]}</td>
+              {titles && titles.map((key, idx) => (
+                <td
+                  data-testid={ idx === 0 ? 'planet-name' : null }
+                  key={ `${i}${key}` }
+                >
+                  {planetsF[key]}
+                </td>
               ))}
             </tr>
           )) : (

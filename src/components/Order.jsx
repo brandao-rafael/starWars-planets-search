@@ -10,7 +10,10 @@ export default function Order() {
     'surface_water',
   ];
   const { filteredPlanets, setFilteredPlanets } = useContext(PlanetsContext);
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState({
+    column: 'diameter',
+    sort: 'ASC',
+  });
 
   const handleSortChange = ({ target: { name, value } }) => {
     setOrder({
@@ -21,6 +24,7 @@ export default function Order() {
 
   const orderResults = () => {
     const { column, sort } = order;
+
     if (sort === 'ASC') {
       const sorted = Object
         .values(filteredPlanets).sort((a, b) => a[column] - b[column]);
@@ -29,6 +33,21 @@ export default function Order() {
       const sortedDesc = Object
         .values(filteredPlanets).sort((a, b) => b[column] - a[column]);
       setFilteredPlanets(sortedDesc);
+    }
+    // know
+    if (column === 'population') {
+      let known = filteredPlanets.filter((planet) => planet.population !== 'unknown');
+      const unknown = filteredPlanets.filter((planet) => planet.population === 'unknown');
+      known = known.sort((a, b) => {
+        if (sort === 'ASC') return a[column] - b[column];
+        return b[column] - a[column];
+      });
+      console.log(unknown);
+      console.log(known);
+      setFilteredPlanets([
+        ...known,
+        ...unknown,
+      ]);
     }
   };
 
