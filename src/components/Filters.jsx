@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PlanetsContext from '../hooks/PlanetsContext';
+import Order from './Order';
 
 export default function Filters() {
   const {
@@ -73,8 +74,7 @@ export default function Filters() {
     setColumnKeys([...columnKeys, filterI.column]);
   };
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
+  const handleChange = ({ target: { name, value } }) => {
     setFilterByNumericValues({
       ...filterByNumericValues,
       [name]: value,
@@ -148,6 +148,7 @@ export default function Filters() {
             Remover todas as filtragens
           </button>
         </div>
+        <Order />
       </div>
     </>
   );
