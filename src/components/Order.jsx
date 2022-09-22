@@ -35,15 +35,13 @@ export default function Order() {
       setFilteredPlanets(sortedDesc);
     }
     // know
-    if (column === 'population') {
-      let known = filteredPlanets.filter((planet) => planet.population !== 'unknown');
-      const unknown = filteredPlanets.filter((planet) => planet.population === 'unknown');
+    if (column === 'population' || column === 'surface_water') {
+      let known = filteredPlanets.filter((planet) => planet[column] !== 'unknown');
+      const unknown = filteredPlanets.filter((planet) => planet[column] === 'unknown');
       known = known.sort((a, b) => {
         if (sort === 'ASC') return a[column] - b[column];
         return b[column] - a[column];
       });
-      console.log(unknown);
-      console.log(known);
       setFilteredPlanets([
         ...known,
         ...unknown,
