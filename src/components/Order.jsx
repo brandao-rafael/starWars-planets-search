@@ -34,7 +34,6 @@ export default function Order() {
         .values(filteredPlanets).sort((a, b) => b[column] - a[column]);
       setFilteredPlanets(sortedDesc);
     }
-    // know
     if (column === 'population' || column === 'surface_water') {
       let known = filteredPlanets.filter((planet) => planet[column] !== 'unknown');
       const unknown = filteredPlanets.filter((planet) => planet[column] === 'unknown');

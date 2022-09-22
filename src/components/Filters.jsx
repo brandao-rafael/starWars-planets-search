@@ -33,7 +33,7 @@ export default function Filters() {
     } else if (comparison === 'menor que') {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => Number(planets[column]) < value));
-    } else {
+    } else if (comparison === 'igual a') {
       setFilteredPlanets(filteredPlanets
         .filter((planets) => planets[column] === value));
     }
@@ -60,8 +60,6 @@ export default function Filters() {
     setFilters([]);
     setFilteredPlanets(dataPlanets);
     setColumnKeys(columns);
-    console.log(dataPlanets);
-    console.log(filteredPlanets);
   };
 
   useEffect(() => {
