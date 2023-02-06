@@ -9,7 +9,7 @@ const Table = () => {
   } = useContext(PlanetsContext);
 
   return (
-    <div>
+    <div className="table-container">
       <h1>Table</h1>
       <table>
         <thead>

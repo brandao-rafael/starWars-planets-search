@@ -50,14 +50,20 @@ export default function Order() {
 
   return (
     <div>
-      <select name="column" data-testid="column-sort" onChange={ handleSortChange }>
+      <select
+        className="order-input"
+        name="column"
+        data-testid="column-sort"
+        onChange={ handleSortChange }
+      >
         {columns.map((column, i) => (
           <option key={ i }>{ column }</option>
         ))}
       </select>
-      <label htmlFor="ASC">
+      <label htmlFor="ASC" className="order-option">
         ASC
         <input
+          className="order-option"
           type="radio"
           name="sort"
           value="ASC"
@@ -66,9 +72,10 @@ export default function Order() {
           onChange={ handleSortChange }
         />
       </label>
-      <label htmlFor="DESC">
+      <label htmlFor="DESC" className="order-option">
         DESC
         <input
+          className="order-option"
           type="radio"
           name="sort"
           value="DESC"
@@ -78,6 +85,7 @@ export default function Order() {
         />
       </label>
       <button
+        className="btn btn-outline-warning"
         type="button"
         data-testid="column-sort-button"
         onClick={ orderResults }

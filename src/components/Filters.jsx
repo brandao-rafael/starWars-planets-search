@@ -81,8 +81,10 @@ export default function Filters() {
 
   return (
     <>
-      <div>
+      <div className="title-search-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Star_Wars_Logo..png" alt="star wars logo" className="title-logo" />
         <input
+          className="search-input"
           type="text"
           value={ filterByName.name }
           onChange={ filterPlanetsByName }
@@ -92,6 +94,7 @@ export default function Filters() {
       </div>
       <form>
         <select
+          className="filter-input"
           name="column"
           data-testid="column-filter"
           value={ filterByNumericValues.column }
@@ -102,6 +105,7 @@ export default function Filters() {
           ))}
         </select>
         <select
+          className="filter-input"
           name="comparison"
           data-testid="comparison-filter"
           onChange={ handleChange }
@@ -113,6 +117,7 @@ export default function Filters() {
         </select>
         <label name="value" htmlFor="numberInput">
           <input
+            className="filter-input"
             name="value"
             type="number"
             data-testid="value-filter"
@@ -122,6 +127,7 @@ export default function Filters() {
           />
         </label>
         <button
+          className="btn btn-outline-warning"
           type="button"
           data-testid="button-filter"
           onClick={ () => filterPlanetsByNumber(filterByNumericValues) }
@@ -131,18 +137,26 @@ export default function Filters() {
       </form>
       <div>
         {filters && filters.map((filterI, i) => (
-          <p key={ `${filterI.column}${i}` } data-testid="filter">
-            { `${filterI.column} ${filterI.comparison} ${filterI.value}` }
+          <div key={ `${filterI.column}${i}` } className="remove-filter">
+            <p className="remove-text" data-testid="filter">
+              { `${filterI.column} ${filterI.comparison} ${filterI.value}` }
+            </p>
             <button
+              className="btn btn-outline-danger"
               type="button"
               onClick={ () => removeOne(filterI) }
             >
-              remove
+              Remove
             </button>
-          </p>
+          </div>
         ))}
         <div>
-          <button type="button" onClick={ removeAll } data-testid="button-remove-filters">
+          <button
+            className="btn btn-outline-warning"
+            type="button"
+            onClick={ removeAll }
+            data-testid="button-remove-filters"
+          >
             Remover todas as filtragens
           </button>
         </div>
